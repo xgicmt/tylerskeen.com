@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-2 col-sm-2 editPages">
+    <% if @properties.present? %>
+      <h3>Your Properties</h3>
+      <ul class="yourProperties">
+      <% @properties.each do |property| %>
+        <li><%= link_to property.name, [:edit, property] %></li>
+      <% end %>
+      </ul>
+    <% end %> 
+    <%= link_to("Create A Property", new_property_path , class: 'btn btn-success') %>
+  </div>
+    <div class="col-md-1 col-sm-1"></div>
+  <div class="col-md-6 col-sm-6 editPages">
+
+    <img src="<%= @sponsor.logo %>" class="sponsorLogo" width="100" alt="Logo" />
+    <p class="sponsorName"><%= @sponsor.name %></p>
+
+    <p class="sponsorAddress"><%= @sponsor.address_street %><br>
+    <%= @sponsor.address_city %>, <%= @sponsor.address_state %> <%= @sponsor.address_zipcode %></p>
+    <p class="sponsorPhone"><%= toPhone(@sponsor.phone_number) %></p>
+    <p class="sponsorWebsite"><a href="http://<%= @sponsor.website %>" target="_blank"><%= @sponsor.website %></a></p>
+    <div class="sponsorSynopsis"><%= markdown_to_html @sponsor.synopsis %></div>
+      <%= link_to "Modify your Sponsor Page", edit_sponsor_path, class: 'btn btn-danger' %>
+
+    <div class="leaderTeamBox">  
+      <p><%= link_to "Create a Team Member", new_leadership_team_member_path, class: 'btn btn-success' %></p>
+      <% if @leaders.present? %>
+        <% @leaders.each do |leader| %>
+          <div class="leaderBox">
+            <img src="<%= leader.picture %>" height="100" width='100' class="ltm_picture" />
+            <span class="leaderName"> <%= leader.name %></span>
+            <%= markdown_to_html leader.synopsis %>
+          </div>
+        <%= link_to "Delete Team Member", leader, method: :delete, data: {confirm: "Are you sure you wish to delete this team member?"}, class: "btn btn-danger" %>
+        <% end %>
+      <% end %>
+    </div>
+
+
+  </div>
+
+</div>

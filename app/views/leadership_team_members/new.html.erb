@@ -1,0 +1,26 @@
+<div class="row">
+ 
+  <div class="col-md-4 col-sm-4"></div>
+  <div class="col-md-4 col-sm-4 editPages">
+  <h2>Add a Team Member</h2>
+    <%= form_for @teammember do |f| %>
+      <p>
+        <%= f.label :name %>
+	    <%= f.text_field :name, class: 'form-control', required: true, placeholder: "Team Member Name" %>
+      </p>
+      
+      <p>
+        <%= f.label :synopsis %>
+        <%= f.text_area :synopsis, rows: 8, cols: 45, class: 'form-control markdown-toolbar', placeholder: "Enter synopsis here" %>
+      </p>
+      <p>
+        <%= f.label :picture %>
+        <%= f.file_field :picture %>
+        <%= f.hidden_field :picture_cache %>
+      </p>
+      <p>
+      <%= f.submit "Save Profile", class: 'btn btn-success' %>
+      </p>
+    <% end %>
+  </div >
+</div>

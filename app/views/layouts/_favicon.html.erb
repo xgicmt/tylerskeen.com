@@ -1,0 +1,11 @@
+<% %w(57 60 72 76 114 120 144 152 180 192).each do |size| %>
+  <%= favicon_link_tag "apple-touch-icon-#{size}x#{size}.png", rel: 'apple-touch-icon', type: 'image/png', sizes: "#{size}x#{size}" %>
+<% end %>
+
+<% %w(16 32).each do |size| %>
+  <%= favicon_link_tag "favicon-#{size}x#{size}.png", rel: 'icon', type: 'image/png', sizes: "#{size}x#{size}" %>
+<% end %>
+<% "Hardcode The MSApplicaiton file" %>
+<link rel="manifest" href="https://s3.amazonaws.com/apartmentfunder-production/images/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="https://s3.amazonaws.com/apartmentfunder-production/images/ms-icon-144x144.png">

@@ -1,0 +1,10 @@
+<h2>New Image Uploader</h2>
+<%= @prop.name %>
+
+<%= form_for([@prop, @propimage]) do |f| %>
+	<%= f.label :image %> <br>
+	<%= f.file_field :image%>
+    <%= f.hidden_field :image_cache %>
+    <br>
+	<%= f.submit %>
+	<% end %>

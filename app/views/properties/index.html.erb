@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-2 col-sm-2"></div>
+  <div class="col-md-8 col-sm-8">
+    <% @props.each do |prop|%>
+        <div class="row propertyListWrapper">
+        <div class="col-md-8 col-sm-8">
+      <p><%= link_to prop.name, prop, class: 'propertyLink' %></p>
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <% prop.propimages.each_with_index do |p, index| %>
+          <li data-target="#carousel-example-generic" data-slide-to="<%= index %>" class= "<%= index == 0 ? 'active' : ''%>"></li>
+        <% end %>
+      </ol>
+
+  <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox" >
+        <% prop.propimages.each_with_index do |propimage, index|%>
+          <div class="<%= index == 0 ? 'item active' : 'item' %>">
+            <%= image_tag propimage.image_name %>
+          </div>
+        <% end %>
+       </div>
+
+  <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+      </div>
+    </div><!-- End Left Column -->
+       <div class="col-md-4 col-sm-4">
+         <p><%= link_to 'At a Glance', prop, class: 'propertyLink' %></p>
+         <p>Purchase Price: <br> <%= prop.purchase_price %></p>
+         <p>Minimum Investment: <br> <%= prop.min_investment %></p>
+         <p>Targeted IRR:<br><%= prop.targeted_irr %></p>
+         <p>Targeted Yield: <br><%= prop.targeted_yield %></p>
+         <p>Targeted Hold Period <br><%= prop.targeted_hold_period %> Months</p>
+         <%= link_to "Learn More", prop , class: 'btn btn-warning' %>
+
+       </div>
+    </div><!--End Row-->
+     <% end %>
+<%     
+=begin %>
+    <div class="slider"><!-- The slider -->
+      <div><!-- A mandatory div used by the slider -->
+       <% prop.propimages.each do |image| %>
+         <div><%= image_tag image.image_name.thumb %></div>
+         <% end %>
+      </div>
+    </div>
+<% 
+=end %>
+  </div> 
+</div>

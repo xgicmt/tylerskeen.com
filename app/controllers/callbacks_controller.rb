@@ -1,0 +1,34 @@
+class CallbacksController < Devise::OmniauthCallbacksController
+
+
+  def facebook
+    @user = User.from_omniauth(request.env["omniauth.auth"])
+    @user.skip_confirmation!    
+    if @user.persisted?
+    	sign_in_and_redirect @user 
+    	set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+    else
+    	session["devise.facebook_data"] = request.env["omniauth.auth"]
+    	puts @user.errors.to_a
+
+    	flash[:alert] = "#{request.env['omniauth.auth']}"
+    	redirect_to new_user_registration_url
+    end
+  end
+
+  def linkedin
+    @user = User.from_omniauth(request.env["omniauth.auth"])
+    @user.skip_confirmation!
+    if @user.persisted?
+    	sign_in_and_redirect @user 
+    	set_flash_message(:notice, :success, :kind => "LinkedIn") if is_navigational_format?
+    else
+    	session["devise.linkedin_data"] = request.env["omniauth.auth"]
+    	flash[:alert] = "User already exists, Try logging in with your email."
+    	redirect_to new_user_registration_url
+    end
+
+  end
+
+
+end

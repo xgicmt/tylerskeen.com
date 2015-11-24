@@ -1,0 +1,141 @@
+<div class="row">
+  <div class="col-md-2 col-sm-2"></div>
+  <div class="col-md-4 col-sm-4 editPages">
+  	<%= form_for @prop do |f| %>
+    <h3>Edit Property</h3>
+      <p>
+        <%= f.label :name, "Property Name" %>
+      <%= f.text_field :name, class: 'form-control', required: true %>
+      </p>
+
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <%= f.label :purchase_price %>
+        <%= f.text_field :purchase_price, class: 'form-control', required: true%>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <%= f.label :min_investment %>
+        <%= f.text_field :min_investment, class: 'form-control', required: true%>
+      </div>
+    </div>
+
+    <div class="row">
+      <h3>Targets </h3>
+      <div class="col-md-6 col-sm-6">
+          <%= f.label :targeted_irr %>
+          <%= f.text_field :targeted_irr, class: 'form-control', required: true %>
+      </div>  
+      <div class="col-md-6 col-sm-6">
+        <p>
+          <%= f.label :targeted_yield %>
+          <%= f.text_field :targeted_yield, class: 'form-control', required: true %> 
+        </p>
+      </div>
+    </div> 
+
+    <div class="row">  
+      <div class="col-md-6 col-sm-6">
+      <p>    
+        <%= f.label "Hold Period (in Months)" %>
+        <%= f.text_field :targeted_hold_period, class: 'form-control', required: true %>
+      </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <h3>Property Address</h3>
+        <p>
+          <%= f.label "Street" %>
+          <%= f.text_field :address_street, class: 'form-control', required: true %>
+        </p>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <p>
+          <%= f.label "City" %>
+          <%= f.text_field :address_city, class: 'form-control', required: true %>
+        </p>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <p>
+          <%= f.label "State" %>
+          <%= f.text_field :address_state, class: 'form-control', required: true %>
+        </p>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <p>
+          <%= f.label "Zipcode" %>
+          <%= f.text_field :address_zipcode, class: 'form-control', required: true %>
+        </p>
+      </div>
+    </div>
+    
+    <h3>Overview</h3>
+      <%= f.text_area :overview, rows: 8, cols: 40, class: 'form-control markdown-toolbar'%>
+
+    <% if @prop.extras.present? %>
+      <h2>Miscellaneous Field</h2>
+      <%= f.fields_for :extras do |extra| %>
+        <p>
+          <%= extra.label :title %>
+          <%= extra.text_field :title, class: 'form-control' %>
+        </p>
+        <%= extra.label :body %>
+        <%= extra.text_area :body, rows: 8, cols: 40, class: 'form-control markdown-toolbar' %>
+        <%= extra.check_box :_destroy %>
+        <%= extra.label :_destroy, 'Remove Field' %>
+        <hr>
+      <% end %>
+    <% end %>
+     
+    <% if @prop.propimages.count < 20 %>
+      <h3>Upload Images</h3>
+      <%= f.fields_for :propimages, @prop.propimages.build do |p| %>
+        <div class="field">
+          <%= p.file_field "images[]", type: :file, :multiple => true, name: "propimages[images][]", id: '' %>
+        </div>
+      <% end %>
+    <% end %>
+    
+    <h3>Upload Documents</h3> 
+    <%= f.fields_for :documents do |doc| %>
+         <%= doc.label :filename %>
+         <%= doc.text_field :filename, class: 'form-control' %>
+      <div class="field">   
+         <%= doc.label :file %>
+         <%= doc.file_field :file %>
+         <%= doc.hidden_field :file_cache %>  
+         <%= doc.check_box :_destroy %>
+         <%= doc.label :_destroy, "Delete Document" %>
+      </div>
+
+    <% end %>
+  
+
+  </div>
+
+  <div class="col-md-4 col-sm-4 editPages spacedLeft">
+    <h3>Property Images</h3>
+    <% if @prop.propimages %>
+      <%= f.fields_for :propimages do |images| %>
+        <div class='imageCheckBox'>
+          <%= image_tag images.object.image_name.thumb %>
+          <%= images.check_box :_destroy %>
+          <%= images.label :_destroy, 'Delete Image' %>
+        </div>
+      <% end %>
+    <% end %>  
+  </div>
+
+</div>
+<div class="row">
+ <div class="col-md-2 col-sm-2"></div>
+ <div class="col-md-4 col-sm-4 editPages">
+      <p>
+      <%= f.submit "Edit Property Changes", class: 'btn btn-success' %>
+      <%= link_to "Delete Property", @prop, method: :delete, data: {confirm: "Are you sure you wish to delete this property?"}, class: 'deleteBtn btn btn-danger' %>
+      </p>
+    <% end %>
+  </div> 
+
+</div>

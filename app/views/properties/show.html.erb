@@ -1,0 +1,132 @@
+<div class="row">
+  <div class="col-md-2 col-sm-2"></div>
+  <div class="col-md-8 col-sm-8 slideShow">
+    <div class="row">
+    <div class="col-md-8 col-sm-8">
+      <h2 class="propName"><%= @prop.name %></h2>
+      <div id="carousel-example-generic" style="width: 100%; height: 400px; overflow:hidden;" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <% @prop.propimages.each_with_index do |p, index| %>
+          <li data-target="#carousel-example-generic" data-slide-to="<%= index %>" class= "<%= index == 0 ? 'active' : ''%>"></li>
+        <% end %>
+      </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox" >
+      <% @prop.propimages.each_with_index do |propimage, index|%>
+        <div class="<%= index == 0 ? 'item active' : 'item' %>">
+          <%= image_tag propimage.image_name %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>    
+    </div>
+      <div class="col-md-4 col-sm-4">
+        <h2 class="propName2"><%= @prop.name %></h2>
+        <p>Purchase Price: <span class="flushRight">$<%= @prop.purchase_price %></span></p>
+        <p>Minimum Investment: <span class="flushRight">$<%= @prop.min_investment %></p>
+        <p>Targeted IRR: <span class="flushRight"><%= @prop.targeted_irr %></p>
+        <p>Targeted Hold Period: <span class="flushRight"><%= @prop.targeted_hold_period %> Months</p>
+        <p>Targeted Yield: <span class="flushRight"><%= @prop.targeted_yield %></p> 
+      </div>
+    </div>
+  </div> 
+</div> 
+<div class="row">
+  <div class="col-md-2 col-sm-2"></div>
+  <div class="col-md-8 col-sm-8 showInfo">
+
+    <h2>Property Overview</h2>
+    <div class="propertyOverview">
+      <%= markdown_to_html @prop.overview %>
+    </div>
+    <% if @documents.present? %>
+    <h2>Important Documents</h2>
+      <div class="documents">
+        <% @documents.each do |doc| %>
+          <a href="<%= doc.file %>" target="_blank"><%= doc.filename %></a>
+        <% end %>
+      </div>
+    <% end %>
+
+    <h2>Sponsor</h2>
+    <div class="sponsorBox">
+      <img class="sponsorLogo" src='<%= @sponsor.logo %>' alt='<%= @sponsor.name %> Logo'/>
+      <p class="sponsorName"> <%= @sponsor.name %></p>
+      <div class="sponsorSynopsis">
+        <%= markdown_to_html @sponsor.synopsis %>
+      </div>
+    </div>
+
+    <div class="leaderTeamBox">
+      <% @leaders.each do |leader| %>
+        <div class="leaderBox">
+          <img src="<%= leader.picture %>" height="100" width='100' class="ltm_picture" />
+          <span class="leaderName"> <%= leader.name %></span>
+          <%= markdown_to_html leader.synopsis %>
+        </div>
+      <% end %>
+    </div>
+
+  <% if @prop.extras %>
+    <% @prop.extras.each do |extra| %>
+      <h2><%= extra.title %></h2>
+      <div class="miscView">
+        <p class="miscBody"><%= markdown_to_html extra.body %></p> 
+      </div>
+    <% end %>
+  <% end %>
+
+    <div class="googleMaps">
+      <div id="map-canvas"></div>  
+    </div>
+  </div>
+
+</div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script>
+var geocoder;
+var map;
+
+function getCoordinates (address, callback) {
+  var coordinates;
+  geocoder.geocode({ address: address}, function (results, status) {
+  	coords_obj = results[0].geometry.location;
+  	//coordinates = [coords_obj.A,coords_obj.F];
+   	//console.log(results[0].geometry.location.lat());
+   	coordinates = [coords_obj.lat(),coords_obj.lng()]
+   	callback(coordinates)
+  })
+} 
+
+function initialize() {
+	getCoordinates('<%= "#{@prop.address_street} #{@prop.address_state} #{@prop.address_zipcode}"  %>', function(coords){
+      var latlng = new google.maps.LatLng(coords[0], coords[1]);		
+      var mapOptions = {
+        zoom: 18,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.SATELLITE
+      };  
+  //  console.log(latlng);
+      map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	})
+}
+
+geocoder = new google.maps.Geocoder();
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>

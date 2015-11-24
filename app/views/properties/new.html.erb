@@ -1,0 +1,87 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-6 col-sm-6 editPages">
+  <h3>Create A New Property</h3>
+  	<%= form_for @prop do |f| %>
+      <p>
+        <%= f.label :name, "Property Name" %>
+	    <%= f.text_field :name, class: 'form-control', required: true %>
+      </p>
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.label :purchase_price %>
+          <%= f.text_field :purchase_price, class: 'form-control', required: true%>
+        </div>
+        <div class="col-md-6">
+          <%= f.label :min_investment %>
+          <%= f.text_field :min_investment, class: 'form-control', required: true%>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Targets </h3>
+        </div>
+        <div class="col-md-6">
+          <%= f.label :targeted_irr %>
+          <%= f.text_field :targeted_irr, class: 'form-control', required: true %>
+        </div>  
+        <div class="col-md-6">
+        <p>
+          <%= f.label :targeted_yield %>
+          <%= f.text_field :targeted_yield, class: 'form-control', required: true %> 
+        </p>
+        </div>
+      </div> 
+      <div class="row">  
+        <div class="col-md-6">
+        <p>    
+          <%= f.label "Hold Period (in Months)" %>
+          <%= f.text_field :targeted_hold_period, class: 'form-control', required: true %>
+        </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Property Address</h3>
+       <p>
+        <%= f.label "Street" %>
+        <%= f.text_field :address_street, class: 'form-control', required: true %>
+      </p>
+      </div>
+      <div class="col-md-6">
+      <p>
+        <%= f.label "City" %>
+        <%= f.text_field :address_city, class: 'form-control', required: true %>
+      </p>
+      </div>
+      <div class="col-md-3">
+      <p>
+        <%= f.label "State" %>
+        <%= f.text_field :address_state, class: 'form-control', required: true %>
+      </p>
+      </div>
+      <div class="col-md-3">
+      <p>
+        <%= f.label "Zipcode" %>
+        <%= f.text_field :address_zipcode, class: 'form-control', required: true %>
+      </p>
+      </div>
+      </div>
+      <h3>Overview</h3>
+        <%= f.text_area :overview, rows: 8, cols: 45, class: 'form-control markdown-toolbar'%>
+
+      <h3>Upload Images</h3>
+        <%= f.fields_for :propimages do |p| %>
+            <div class="field">
+              <%= p.file_field "images[]", type: :file, :multiple => true, name: "propimages[images][]" %>
+            </div>
+        <% end %>  
+      <p>
+      <%= f.submit "Create Property", class: 'btn btn-success' %>
+      </p>
+    <% end %>
+  </div>
+
+</div>

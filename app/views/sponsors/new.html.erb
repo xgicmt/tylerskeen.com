@@ -1,0 +1,65 @@
+<div class="row">
+ 
+  <div class="col-md-4 col-sm-4"></div>
+  <div class="col-md-4 col-sm-4 editPages">
+  <h2>Become a Sponsor</h2>
+    <%= form_for @sponsor do |f| %>
+      <p>
+        <%= f.label :name %>
+	    <%= f.text_field :name, class: 'form-control', required: true, placeholder: "Company Name" %>
+      </p>
+      <p>Address</p>
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+      <p>
+        <%= f.label "Street" %>
+        <%= f.text_field :address_street, class: 'form-control', required: true, placeholder: "Street Address" %>
+      </p>
+      </div>
+      <div class="col-md-6">
+      <p>
+        <%= f.label "City" %>
+        <%= f.text_field :address_city, class: 'form-control', required: true, placeholder: "City" %>
+      </p>
+      </div>
+      <div class="col-md-3">
+      <p>
+        <%= f.label "State" %>
+        <%= f.text_field :address_state, class: 'form-control', required: true, placeholder: "State" %>
+      </p>
+      </div>
+      <div class="col-md-3">
+      <p>
+        <%= f.label "Zipcode" %>
+        <%= f.text_field :address_zipcode, class: 'form-control', required: true, placeholder: "zipcode" %>
+      </p>
+      </div>
+      </div>
+      <p>
+        <%= f.label :phone_number %>
+        <%= f.text_field :phone_number, class: 'form-control', required: true, placeholder: "123-456-7890" %>
+      </p>
+      <p>
+        <%= f.label :website %>
+        <%= f.text_field :website, class: 'form-control', required: true, placeholder: "www.example.com" %>
+      </p>
+      <p>
+        <%= f.label :synopsis %>
+        <%= f.text_area :synopsis, rows: 8, cols: 45, class: 'form-control markdown-toolbar', placeholder: "Enter synopsis here" %>
+      </p>
+      <p>
+        <%= f.label :logo %>
+        <%= f.file_field :logo %>
+        <%= f.hidden_field :logo_cache %>
+      </p>
+      <p>
+      <%= f.submit "Save Profile", class: 'btn btn-success' %>
+      </p>
+    <% end %>
+  </div >
+</div>
+<script type="text/javascript">
+            $().ready(function() {
+               $("#notes").wmd(); 
+            });
+        </script>

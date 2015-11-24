@@ -1,0 +1,30 @@
+TYLERSKEEN_DATABASE_PASSWORD: 12Bravo20
+# pusher_app_id: "2954"
+# pusher_key: 7381a978f7dd7f9a1117
+# pusher_secret: abdc3b896a0ffb85d373
+# stripe_api_key: sk_test_2J0l093xOyW72XUYJHE4Dv2r
+# stripe_publishable_key: pk_test_ro9jV5SNwGb1yYlQfzG17LHK
+#
+# production:
+#   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
+#   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
+production:
+  SECRET_KEY_BASE: 922bd2a4d62aa687c3be829d184bea4e9a5e3d98fb20f15b0d2352d71ea16264fb47f2b32215fd52ee04b128cf7d12bae6efafd1cb7d29fb949d0c650ef3367a
+  TYLERSKEEN_DATABASE_PASSWORD: 12Bravo20
+  DREAMHOST_USERNAME: contact@tylerskeen.com
+  DREAMHOST_PASSWORD: 12Bravo20
+
+#SENDGRID_USERNAME: app37445694@heroku.com
+#SENDGRID_PASSWORD: zvhfgyge7846
+#FACEBOOK_APP_ID: '646672525469449'
+#FACEBOOK_APP_SECRET: 5940d0b53716570bc3b3999ece684564
+#LINKEDIN_CLIENT_ID: 75gx98wfk0b5y8
+#LINKEDIN_CLIENT_SECRET: D1AhyqGmcwMQVbB3
+#STRIPE_PUBLISHABLE_KEY: pk_test_eMk4TcnW5bX0DKBftXaOyTjY
+#STRIPE_SECRET_KEY: sk_test_mMiKjzhHColZ5slTwojJBkFQ
+#AWS_ACCESS_KEY_ID: AKIAJVBGIHTXSLNTNR7A
+#AWS_SECRET_ACCESS_KEY: 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
+#development:
+#  AWS_BUCKET: apartmentfunder-development
+#production:
+#  AWS_BUCKET: apartmentfunder-production

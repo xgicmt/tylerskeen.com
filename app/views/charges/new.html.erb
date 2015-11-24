@@ -1,0 +1,19 @@
+ <div class="row">
+  <div class="col-md-2 col-sm-2"></div>
+  <div class="col-md-4 col-sm-4 fullBackground">
+  <p>Before you purchase a sponsorship please be sure that you understand our policy and user agreement.  The key to our mutual success is found in our ability to communicate with each other.</p>
+    <p>I have read and agree to the <a href="#" target="_blank">Sponsors Policy</a>: 
+     <input type="checkbox" id="policyCheck" style="margin-left:10px;">
+    </p>
+	 <%= form_tag charges_path do %>
+       <div id="scriptDiv" style="display:none;">  
+	     <h4>Purchase your Sponsor Membership</h4>   
+		    <script class="stripe-button" src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" >
+		    /*This is here */ 
+		   </script> 
+		   </div>
+
+    <% end %>
+
+  </div>
+ </div>
